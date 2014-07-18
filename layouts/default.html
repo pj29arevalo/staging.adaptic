@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<% has_menu = (!@site.config[:no_menu].include? @item.path) %>
+<head>
+    <meta charset="UTF-8">
+    <title>Adaptic Solutions - <%= @item[:title] %></title>
+    <meta name="description" content="" >
+
+    <!-- favicon --> 
+    <link rel="shortcut icon" href="<%= @items['/images/favicon/favicon/'].path %>">
+    <link rel="apple-touch-icon" href="<%= @items['/images/favicon/apple-touch-icon/'].path %>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<%= @items['/images/favicon/apple-touch-icon-72x72/'].path %>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<%= @items['/images/favicon/apple-touch-icon-114x114/'].path %>">
+    <link rel="apple-touch-icon" sizes="144x144" href="<%= @items['/images/favicon/apple-touch-icon/'].path %>">
+
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+    <!-- Bootstrap  -->
+    <link href="<%= @items['/assets/css/bootstrap-min/'].path %>" rel="stylesheet">
+
+    <!-- icon fonts font Awesome -->
+    <link href="<%= @items['/assets/css/font-awesome-font-face/'].path %>" rel="stylesheet">
+    <link href="<%= @items['/assets/css/font-awesome-min/'].path %>" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link href="<%= @items['/assets/css/style/'].path %>" rel="stylesheet">
+    <link href="<%= @items['/assets/css/responsive/'].path %>" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+        <script src="assets/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Important owl stylesheet -->
+        <link rel="stylesheet" href="<%= @items['/assets/css/owl-carousel/'].path %>">
+
+        <!-- Important prettyPhoto stylesheet -->
+        <link rel="stylesheet" href="<%= @items['/assets/css/prettyPhoto/'].path %>">
+
+    </head>
+    <body>
+        <!-- Preloader 
+         <div id="preloader">
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+         Preloader End -->
+          
+        <div id="page-top"></div>
+
+        <!-- Main Menu -->
+        <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                
+                <div class="navbar-header">
+                    <!-- responsive navigation -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-bars"></i>
+                    </button> <!-- /.navbar-toggle -->
+                    <!-- Logo -->
+                    <a class="navbar-brand" href="/">
+                        <img src="<%= @items['/images/logo1/'].path %>" alt="Adaptic Logo"/>
+                        <h1>Adaptic Solutions</h1>
+                    </a><!-- /.navbar-brand -->
+                </div> <!-- /.navbar-header -->
+
+  <%= render 'menu' %>
+
+        </div>           
+        </nav><!-- /#main-menu -->
+        <!-- Main Menu End -->
+
+<% if(@item.path == '/') then %>
+    <%= render 'carousel' %>
+<%else%>
+    <!-- Blog Header -->
+     <% topLevel = /^\/(.+)\/(.+)/.match(@item.path)[1] %>
+        <section id="blog-header" class="parallax-style" style="background-image: url('<%= @items['/images/'+topLevel+'-img/'].path %>'); margin: 0 0 40px 0;">
+            <div class="parallax-overlay">
+                <div class="container text-center">
+                    <h2 class="section-title"><%= @item[:title] %></h2>
+                    <div class="section-title-bottom">
+                        <span class="section-title-bottom-inner blue-border"></span>
+                    </div><!-- /.section-title-bottom -->
+                </div><!-- /.container -->
+            </div><!-- /.parallax-overlay -->
+        </section><!-- /#blog-header -->
+        <!-- Blog Header  End -->
+<%end%>
+
+    <div class="container">
+            <div class="row">
+                    <div id="blog-contents" class="col-lg-<%= (has_menu)?8:12 %>" style="<% if (has_menu) then %>margin: 40px 0;<%end%>">
+                        <%= yield %>
+                    </div>
+                    
+<% if(has_menu) then %>                 
+                    <div class="col-lg-4">
+                    <div id="blog-sidebar" class="bs-docs-sidebar" role="complementary" style="<% if (has_menu) then %>margin: 40px 0;<%end%>">
+                        <% topLevel = /^\/(.+)\/(.+)/.match(@item.path)[1] %>                   
+                        <%= render topLevel+'-menu' %>
+                    </div>
+                    </div>
+<%end%>
+                </div>
+        </div>
+
+
+
+    <%= render 'footer' %>
+
+    <!-- Include jquery.min.js plugin -->
+    <script src="<%= @items['/assets/js/jquery-min/'].path %>"></script>
+
+    <!-- Modernizr js -->
+    <script src="<%= @items['/assets/js/modernizr-min/'].path %>"></script>
+
+    <script src="<%= @items['/assets/js/jquery-visible-min/'].path %>"></script>
+
+    <!-- Include jquery.fitvids.js plugin -->
+    <script src="<%= @items['/assets/js/jquery-fitvids/'].path %>"></script>
+
+    <script src="<%= @items['/assets/js/jquery-bgvideo-min/'].path %>"></script>
+
+    <!-- included plugins inside  plugins.js -->
+    <script src="<%= @items['/assets/js/plugins/'].path %>"></script>
+
+    <!-- Include functions.js -->
+    <script src="<%= @items['/assets/js/functions/'].path %>"></script>
+
+    <script type="text/javascript">
+
+    /* Current Menu Item 
+    -----------------------------------------------------------------------*/
+    // jQuery(document).ready(function($) {
+    //     "use strict";
+    //     jQuery('#main-menu #headernavigation').onePageNav({
+    //         currentClass: 'active',
+    //         changeHash: false,
+    //         scrollSpeed: 750,
+    //         scrollThreshold: 0.5,
+    //         scrollOffset: 60,
+    //         filter: '',
+    //         easing: 'swing'
+    //     });  
+    // });
+
+    // jQuery(document).ready(function(){
+    //       // Target your .container, .wrapper, .post, etc.
+    //       jQuery(".video-container").fitVids();
+    //     });
+
+
+    // jQuery('.videobg-section').bgVideo();
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        var path = window.location.href;
+        var split = path.split('/');
+        console.log(split);
+    });
+
+</script>
+</body>
+</html>
